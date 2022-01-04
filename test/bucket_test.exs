@@ -1,6 +1,9 @@
 defmodule KV.BucketTest do
   use ExUnit.Case, async: true
 
+  @doc """
+  setup macro defines a callback that runs before every test, in the sae process as the test itself.
+  """
   setup do
     {:ok, bucket} = KV.Bucket.start_link([])
     %{bucket: bucket}
@@ -12,5 +15,8 @@ defmodule KV.BucketTest do
 
     KV.Bucket.put(bucket, "milk", 3)
     assert KV.Bucket.get(bucket, "milk") == 3
+
+    KV.Bucket.delete(bucket, "milk")
+    assert KV.Bucket.get(bucket, "milk") == nil
   end
 end
