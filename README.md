@@ -1,6 +1,9 @@
 # KV
-
+The application works as a distributed key-value store.
 **TODO: Add description**
+
+## Application Overview
+KeyValue(KV) is an application that works as a distributed key-value store. The key-value pairs will be organized into buckets and those buckets will be distributed across multiple nodes.
 
 ## Installation
 
