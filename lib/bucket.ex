@@ -29,9 +29,12 @@ defmodule KV.Bucket do
   """
   def delete(bucket, key) do
     # Agent.get_and_update(bucket, &Map.pop(&1, key))
+    # Here is the client code
     Agent.get_and_update(bucket, fn dict ->
+      # Here is the server code
       Map.pop(dict, key) 
     end)
+    # Back to the client code
   end
 
 end
