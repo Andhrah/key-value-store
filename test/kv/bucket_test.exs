@@ -2,10 +2,12 @@ defmodule KV.BucketTest do
   use ExUnit.Case, async: true
 
   @doc """
-  setup macro defines a callback that runs before every test, in the sae process as the test itself.
+  setup macro defines a callback that runs before every test, 
+  in the same process as the test itself.
   """
   setup do
-    {:ok, bucket} = KV.Bucket.start_link([])
+    # {:ok, bucket} = KV.Bucket.start_link([])
+    bucket = start_supervised!(KV.Bucket)
     %{bucket: bucket}
   end
 
