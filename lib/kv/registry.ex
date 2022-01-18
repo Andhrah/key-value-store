@@ -34,7 +34,7 @@ defmodule KV.Registry do
   def init(:ok) do
     names = %{}
     refs = %{}
-    {:ok, %{names, refs}}
+    {:ok, {names, refs}}
   end
 
   @impl true
@@ -55,6 +55,13 @@ defmodule KV.Registry do
       {:noreply, {names, refs}}
       # {:noreply, Map.put(names, name, bucket)}
     end
+  end
+
+  @impl true
+  def handle_info({:DOWN, ref, :process, _pid, _reason}, {names, refs}) do
+    {name, refs} = Map.pop(refs, ref)
+    names = Map.delete(names, name)
+    {:noreply, {names, refs}}
   end
 
   @impl true
